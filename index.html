@@ -1,0 +1,977 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARMANYA - CNC Kesim Metal Dekor Ürünleri</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #1a1a1a;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ff6b35;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ff6b35;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .logo:hover {
+            color: #ff8c61;
+        }
+
+        .nav-logo {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b35;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #fff;
+            transition: color 0.3s;
+        }
+
+        .cart-icon:hover {
+            color: #ff6b35;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff6b35;
+            color: #fff;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #ff6b35;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('assets/img/metal-duvar-tablosu-lazer-kesim-asamasi.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hero-content h1 span {
+            color: #ff6b35;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #ccc;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #ff6b35;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            border: 2px solid #ff6b35;
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: #ff6b35;
+            transform: translateY(-3px);
+        }
+
+        /* Features */
+        .features {
+            padding: 5rem 5%;
+            background: #222;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #ff6b35;
+            margin: 1rem auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #333;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff6b35;
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+        }
+
+        /* Products Preview */
+        .products-preview {
+            padding: 5rem 5%;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #333;
+            transition: all 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff6b35;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #ff6b35;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background: #ff6b35;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .add-to-cart:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .cart-content {
+            background: #222;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            border: 2px solid #ff6b35;
+            animation: slideIn 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-cart {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            background: #ff6b35;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        .close-cart:hover {
+            transform: rotate(90deg);
+        }
+
+        .cart-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #ff6b35;
+            text-align: center;
+        }
+
+        .cart-item {
+            background: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #333;
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background: #333;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-details h4 {
+            color: #ff6b35;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-details p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #333;
+            border-radius: 5px;
+            padding: 0.3rem;
+        }
+
+        .quantity-control button {
+            width: 30px;
+            height: 30px;
+            background: #ff6b35;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background 0.3s;
+        }
+
+        .quantity-control button:hover {
+            background: #e55a2b;
+        }
+
+        .quantity-control span {
+            padding: 0 0.5rem;
+            font-weight: 600;
+        }
+
+        .remove-item {
+            color: #ff4444;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .remove-item:hover {
+            color: #ff0000;
+        }
+
+        .cart-total {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid #ff6b35;
+            text-align: right;
+        }
+
+        .cart-total h3 {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkout-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 1rem;
+            background: #25d366;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .checkout-btn:hover {
+            background: #128c7e;
+            transform: translateY(-2px);
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 3rem;
+            color: #888;
+        }
+
+        .empty-cart i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 2px solid #ff6b35;
+        }
+
+        .footer-social {
+            margin: 2rem 0;
+        }
+
+        .footer-social a {
+            color: #fff;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: #ff6b35;
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #000;
+                flex-direction: column;
+                padding: 2rem;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .social-icons {
+                display: none;
+            }
+
+            .cart-item {
+                grid-template-columns: 60px 1fr;
+            }
+
+            .cart-item-actions {
+                grid-column: 1 / -1;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+            
+            .nav-logo {
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="assets/img/armanya logo.png" alt="Armanya Logo" class="nav-logo">
+            <span>ARMANYA</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="urunler.html">Ürünlerimiz</a></li>
+            <li><a href="hakkimizda.html">Hakkımızda</a></li>
+            <li><a href="iletisim.html">İletişim</a></li>
+            <li class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </li>
+        </ul>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/armanya_home?igsh=Njk3NWxzemIyaW1s" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://wa.me/905530303570" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div class="menu-toggle" id="mobileMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-content">
+            <span class="close-cart" onclick="toggleCart()">&times;</span>
+            <h2 class="cart-title"><i class="fas fa-shopping-cart"></i> Sepetiniz</h2>
+            <div id="cartItems">
+                <!-- Sepet öğeleri buraya gelecek -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>CNC Kesim <span>Metal</span> Dekor</h1>
+            <p>Evleriniz için özel tasarım metal dekorasyon ürünleri</p>
+            <a href="urunler.html" class="btn">Ürünleri İncele</a>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <h2 class="section-title">Neden Biz?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-cut"></i>
+                <h3>Precizyon Kesim</h3>
+                <p>Son teknoloji CNC makineleri ile milimetrik hassasiyet</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-palette"></i>
+                <h3>Özel Tasarım</h3>
+                <p>İsteğinize göre özelleştirilebilir ürünler</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shipping-fast"></i>
+                <h3>Hızlı Teslimat</h3>
+                <p>Türkiye'nin her yerine güvenli kargo</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Preview -->
+    <section class="products-preview">
+        <h2 class="section-title">Popüler Ürünler</h2>
+        <div class="products-grid" id="homeProducts">
+            <!-- Ürünler JavaScript ile eklenecek -->
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="urunler.html" class="btn">Tüm Ürünleri Gör</a>
+        </div>
+    </section>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/905530303570?text=Merhaba,%20ürünleriniz%20hakkında%20bilgi%20almak%20istiyorum" 
+       class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/armanya_home?igsh=Njk3NWxzemIyaW1s" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://wa.me/905530303570" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>&copy; 2026 ARMANYA. Tüm hakları saklıdır.</p>
+        <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
+            Ödeme ve sipariş için WhatsApp'tan bize ulaşın
+        </p>
+    </footer>
+
+    <script>
+        // Ürün verileri - GERÇEK RESİM YOLLARI İLE
+        const products = [
+            {
+                id: 1,
+                name: "Kelebek ve Çiçek Temalı Metal Duvar Dekoru",
+                price: 450,
+                 image: "assets/img/cicekli-kelebek-figurlu-metal-duvar-tablosu.jpeg",
+                description: "Yaşam Alanınıza Doğanın Zarafetini Taşıyın: Kelebek ve Çiçek Detaylı Metal Duvar Tablosu"
+            },
+            {
+                id: 2,
+                name: "Karizmatik ve Modern: Metal Atatürk Silueti",
+                price: 380,
+                image: "assets/img/mustafa-kemal-ataturk-metal-siluet-duvar-tablosu.jpeg",
+                description: "Modern çizgisel tasarımlı siyah metal Mustafa Kemal Atatürk portresi"
+            },
+            {
+                id: 3,
+                name: "Dekoratif Metal Cami Silüeti",
+                price: 650,
+                image: "assets/img/dekoratif-metal-cami-silueti-duvar-tablosu.jpeg",
+                description: "İslami Duvar Sanatı: Metal Cami Figürlü Tablo"
+            },
+            {
+                id: 4,
+                name: "Dekoratif Balık Sürüsü Metal Duvar Sanatı",
+                price: 220,
+                image: "assets/img/modern-balik-surusu-metal-duvar-dekoru.jpeg",
+                description: "3'lü metal ayraç seti"
+            },
+            {
+                id: 5,
+                name: "Mutfak ve Bar İçin İdeal: Kahve köşesi",
+                price: 520,
+                image: "assets/img/mutfak-dekoru-am-pm-kahve-sarap-metal-tablo.jpeg",
+                description: "Geometrik aslan başı tasarımı"
+            },
+            {
+                id: 6,
+                name: "Retro Klasik Kamyonet Metal Duvar Dekoru",
+                price: 480,
+                image: "assets/img/retro-klasik-kamyonet-palmiye-metal-tablo.jpeg",
+                description: "Nostaljik Yolculuk: Metal Klasik Araba Duvar Dekoru"
+            }
+        ];
+
+        // Sepet
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Ana sayfaya ürünleri ekle
+        function renderHomeProducts() {
+            const container = document.getElementById('homeProducts');
+            container.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}" onerror="this.src='assets/img/metal-duvar-tablosu-lazer-kesim-asamasi.jpg'">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">₺${product.price}</div>
+                        <button class="add-to-cart" onclick="addToCart(${product.id})">
+                            <i class="fas fa-cart-plus"></i> Sepete Ekle
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Sepete ekle
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+
+            saveCart();
+            updateCartCount();
+            showNotification('Ürün sepete eklendi!');
+        }
+
+        // Sepetten çıkar
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+            updateCartCount();
+            renderCart();
+        }
+
+        // Miktar artır
+        function increaseQuantity(productId) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += 1;
+                saveCart();
+                renderCart();
+                updateCartCount();
+            }
+        }
+
+        // Miktar azalt
+        function decreaseQuantity(productId) {
+            const item = cart.find(item => item.id === productId);
+            if (item && item.quantity > 1) {
+                item.quantity -= 1;
+                saveCart();
+                renderCart();
+                updateCartCount();
+            } else if (item && item.quantity === 1) {
+                removeFromCart(productId);
+            }
+        }
+
+        // Sepeti kaydet
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        // Sepet sayısını güncelle
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        // Sepeti göster/gizle
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            if (modal.style.display === 'block') {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            } else {
+                renderCart();
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Sepeti render et
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Sepetiniz boş</p>
+                        <a href="urunler.html" class="btn" style="margin-top: 1rem; display: inline-block;">Alışverişe Başla</a>
+                    </div>
+                `;
+                return;
+            }
+
+            let total = 0;
+            let itemsHTML = cart.map(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-image">
+                            <img src="${item.image}" alt="${item.name}" onerror="this.src='assets/img/metal-duvar-tablosu-lazer-kesim-asamasi.jpg'">
+                        </div>
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <p>₺${item.price} x ${item.quantity}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <div class="quantity-control">
+                                <button onclick="decreaseQuantity(${item.id})">-</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="increaseQuantity(${item.id})">+</button>
+                            </div>
+                            <span class="remove-item" onclick="removeFromCart(${item.id})">
+                                <i class="fas fa-trash"></i> Kaldır
+                            </span>
+                            <div style="font-weight: 700; color: #ff6b35; margin-top: 0.5rem;">
+                                ₺${itemTotal}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = `
+                ${itemsHTML}
+                <div class="cart-total">
+                    <h3>Toplam: ₺${total}</h3>
+                    <button class="checkout-btn" onclick="checkoutWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> WhatsApp ile Sipariş Ver
+                    </button>
+                </div>
+            `;
+        }
+
+        // WhatsApp ile sipariş
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert('Sepetiniz boş!');
+                return;
+            }
+
+            let message = 'Merhaba, aşağıdaki ürünleri sipariş etmek istiyorum:\n\n';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                message += `• ${item.name}\n`;
+                message += `  Fiyat: ₺${item.price} x ${item.quantity}\n`;
+                message += `  Toplam: ₺${itemTotal}\n\n`;
+            });
+
+            message += `*GENEL TOPLAM: ₺${total}*\n\n`;
+            message += 'Adres ve kargo bilgileri için dönüşünüzü bekliyorum.';
+
+            const whatsappUrl = `https://wa.me/905530303570?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Bildirim göster
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: #25d366;
+                color: #fff;
+                padding: 1rem 2rem;
+                border-radius: 5px;
+                z-index: 3000;
+                animation: slideInRight 0.3s;
+                font-weight: 600;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', () => {
+            renderHomeProducts();
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim - Armanya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #1a1a1a; color: #fff; line-height: 1.6; }
+        
+        nav { background: rgba(0, 0, 0, 0.95); padding: 1rem 5%; position: fixed; width: 100%; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff6b35; }
+        .logo { font-size: 1.8rem; font-weight: 700; color: #ff6b35; text-decoration: none; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 600; transition: color 0.3s; text-transform: uppercase; font-size: 0.9rem; }
+        .nav-links a:hover, .nav-links a.active { color: #ff6b35; }
+        .social-icons { display: flex; gap: 1rem; }
+        .social-icons a { color: #fff; font-size: 1.2rem; transition: color 0.3s; }
+        .social-icons a:hover { color: #ff6b35; }
+        
+        .page-header { margin-top: 70px; padding: 4rem 5%; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=1920') center/cover; text-align: center; }
+        .page-header h1 { font-size: 3rem; text-transform: uppercase; margin-bottom: 1rem; }
+        
+        .contact-section { padding: 5rem 5%; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; text-transform: uppercase; position: relative; }
+        .section-title::after { content: ''; display: block; width: 80px; height: 4px; background: #ff6b35; margin: 1rem auto; }
+        
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
+        .contact-card { background: #222; padding: 2.5rem; border-radius: 10px; text-align: center; border: 2px solid #333; transition: all 0.3s; }
+        .contact-card:hover { border-color: #ff6b35; transform: translateY(-5px); }
+        .contact-card i { font-size: 3rem; color: #ff6b35; margin-bottom: 1.5rem; }
+        .contact-card h3 { margin-bottom: 1rem; color: #fff; font-size: 1.5rem; }
+        .contact-card p, .contact-card a { color: #ccc; text-decoration: none; transition: color 0.3s; }
+        .contact-card a:hover { color: #ff6b35; }
+        
+        .whatsapp-btn-large { display: inline-block; margin-top: 1rem; padding: 1rem 2rem; background: #25d366; color: #fff; text-decoration: none; border-radius: 5px; font-weight: 600; transition: all 0.3s; }
+        .whatsapp-btn-large:hover { background: #128c7e; transform: scale(1.05); }
+        
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: #fff; width: 60px; height: 60px; border-radius: 50%; text-align: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+        
+        footer { background: #000; padding: 3rem 5%; text-align: center; border-top: 2px solid #ff6b35; margin-top: 4rem; }
+        .footer-social a { color: #fff; font-size: 1.5rem; margin: 0 1rem; transition: color 0.3s; }
+        .footer-social a:hover { color: #ff6b35; }
+        
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; }
+        .menu-toggle span { width: 25px; height: 3px; background: #fff; margin: 3px 0; transition: 0.3s; }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: #000; flex-direction: column; padding: 2rem; text-align: center; }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: flex; }
+            .social-icons { display: none; }
+        }
+        /* Logo container */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Logo ile yazı arası boşluk */
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ff6b35;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.logo:hover {
+    color: #ff8c61;
+}
+
+/* Navbar logo görseli */
+.nav-logo {
+    height: 45px; /* Logo yüksekliği */
+    width: auto;  /* En-boy oranı korunsun */
+    object-fit: contain;
+}
+
+/* Mobilde logo boyutu */
+@media (max-width: 768px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+    
+    .nav-logo {
+        height: 35px;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav>
+           <a href="index.html" class="logo">
+    <img src="../armanya-cnc-lazer-kesim-website/assets/img/armanya logo.png" alt="Armanya Logo" class="nav-logo">
+    <span>ARMANYA</span>
+</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="urunler.html">Ürünlerimiz</a></li>
+            <li><a href="hakkimizda.html">Hakkımızda</a></li>
+            <li><a href="iletisim.html" class="active">İletişim</a></li>
+        </ul>
+        <div class="social-icons">
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://pinterest.com" target="_blank"><i class="fab fa-pinterest"></i></a>
+        </div>
+        <div class="menu-toggle" id="mobileMenu">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>İletişim</h1>
+        <p>Bizimle iletişime geçin</p>
+    </div>
+
+    <section class="contact-section">
+        <h2 class="section-title">Bize Ulaşın</h2>
+        
+        <div class="contact-grid">
+            <div class="contact-card">
+                <i class="fab fa-whatsapp"></i>
+                <h3>WhatsApp</h3>
+                <p>Sipariş ve bilgi için</p>
+                <a href="https://wa.me/905XXXXXXXXX" class="whatsapp-btn-large" target="_blank">
+                    <i class="fab fa-whatsapp"></i> WhatsApp'tan Yazın
+                </a>
+            </div>
+            
+            <div class="contact-card">
+                <i class="fas fa-phone"></i>
+                <h3>Telefon</h3>
+                <p><a href="tel:+905XXXXXXXXX">05XX XXX XX XX</a></p>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">Pazartesi - Cumartesi<br>09:00 - 18:00</p>
+            </div>
+            
+            <div class="contact-card">
+                <i class="fas fa-envelope"></i>
+                <h3>E-posta</h3>
+                <p><a href="mailto:info@metalcraft.com">info@metalcraft.com</a></p>
+            </div>
+            
+            <div class="contact-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Adres</h3>
+                <p>İstanbul, Türkiye<br>CNC Atölyemiz</p>
+            </div>
+            
+            <div class="contact-card">
+                <i class="fab fa-instagram"></i>
+                <h3>Instagram</h3>
+                <p><a href="https://instagram.com/metalcraft" target="_blank">@metalcraft</a></p>
+                <p style="margin-top: 1rem; font-size: 0.9rem;">Tüm ürünlerimizi görmek için</p>
+            </div>
+            
+            <div class="contact-card">
+                <i class="fas fa-truck"></i>
+                <h3>Kargo & Teslimat</h3>
+                <p>Türkiye'nin her yerine<br>güvenli kargo</p>
+            </div>
+        </div>
+    </section>
+
+    <a href="https://wa.me/905XXXXXXXXX" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer>
+        <div class="footer-social">
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://pinterest.com" target="_blank"><i class="fab fa-pinterest"></i></a>
+        </div>
+        <p>&copy; 2026 ARMANYA. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script>
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+        mobileMenu.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+    </script>
+</body>
+</html>

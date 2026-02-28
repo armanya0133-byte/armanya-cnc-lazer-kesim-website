@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürünlerimiz - Armanya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: #1a1a1a; color: #fff; line-height: 1.6; }
+        
+        nav { background: rgba(0, 0, 0, 0.95); padding: 1rem 5%; position: fixed; width: 100%; top: 0; z-index: 1000; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #ff6b35; }
+        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 700; color: #ff6b35; text-decoration: none; transition: all 0.3s; }
+        .logo:hover { color: #ff8c61; }
+        .nav-logo { height: 45px; width: auto; object-fit: contain; }
+        
+        .nav-links { display: flex; list-style: none; gap: 2rem; align-items: center; }
+        .nav-links a { color: #fff; text-decoration: none; font-weight: 600; transition: color 0.3s; text-transform: uppercase; font-size: 0.9rem; }
+        .nav-links a:hover, .nav-links a.active { color: #ff6b35; }
+        
+        .cart-icon { position: relative; cursor: pointer; font-size: 1.5rem; color: #fff; transition: color 0.3s; }
+        .cart-icon:hover { color: #ff6b35; }
+        .cart-count { position: absolute; top: -10px; right: -10px; background: #ff6b35; color: #fff; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; }
+        
+        .social-icons { display: flex; gap: 1rem; }
+        .social-icons a { color: #fff; font-size: 1.2rem; transition: color 0.3s; }
+        .social-icons a:hover { color: #ff6b35; }
+        
+        .page-header { margin-top: 70px; padding: 4rem 5%; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('../armanya-cnc-lazer-kesim-website/assets/img/metal-duvar-tablosu-lazer-kesim-asamasi.jpg') center/cover; text-align: center; }
+        .page-header h1 { font-size: 3rem; text-transform: uppercase; margin-bottom: 1rem; }
+        
+        .products-section { padding: 5rem 5%; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; text-transform: uppercase; position: relative; }
+        .section-title::after { content: ''; display: block; width: 80px; height: 4px; background: #ff6b35; margin: 1rem auto; }
+        
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
+        
+        .product-card { background: #222; border-radius: 10px; overflow: hidden; border: 2px solid #333; transition: all 0.3s; cursor: pointer; position: relative; }
+        .product-card:hover { transform: translateY(-10px); border-color: #ff6b35; box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3); }
+        
+        .product-image { width: 100%; height: 300px; background: #333; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .product-card:hover .product-image img { transform: scale(1.05); }
+        .image-fallback { font-size: 4rem; color: #555; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; background: #333; }
+        
+        .product-info { padding: 1.5rem; }
+        .product-title { font-size: 1.3rem; margin-bottom: 0.5rem; color: #ff6b35; }
+        .product-price { font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 1rem; }
+        
+        .add-to-cart { width: 100%; padding: 0.8rem; background: #ff6b35; color: #fff; border: none; border-radius: 5px; font-weight: 600; cursor: pointer; transition: all 0.3s; text-transform: uppercase; }
+        .add-to-cart:hover { background: #e55a2b; transform: translateY(-2px); }
+        
+        .product-hint { color: #888; font-size: 0.9rem; text-align: center; padding: 0.5rem; background: rgba(255, 107, 53, 0.1); border-top: 1px solid #333; }
+        
+        /* Modal */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .modal-content { background: #222; margin: 5% auto; padding: 0; border-radius: 10px; width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto; position: relative; border: 2px solid #ff6b35; animation: slideIn 0.3s; }
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .close-modal { position: absolute; right: 20px; top: 20px; color: #fff; font-size: 2rem; cursor: pointer; z-index: 10; width: 40px; height: 40px; background: #ff6b35; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.3s; }
+        .close-modal:hover { transform: rotate(90deg); }
+        
+        .modal-body { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem; }
+        .modal-image { width: 100%; height: 400px; background: #333; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .modal-image img { width: 100%; height: 100%; object-fit: contain; background: #222; }
+        
+        .modal-details h2 { color: #ff6b35; margin-bottom: 1rem; font-size: 2rem; }
+        .modal-details .price { font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem; color: #fff; }
+        
+        .specs-list { list-style: none; margin: 1.5rem 0; }
+        .specs-list li { padding: 0.5rem 0; border-bottom: 1px solid #333; display: flex; justify-content: space-between; }
+        .specs-list li strong { color: #ff6b35; }
+        
+        .order-btn { display: inline-block; width: 100%; padding: 1rem; background: #25d366; color: #fff; text-align: center; text-decoration: none; border-radius: 5px; font-weight: 700; font-size: 1.1rem; margin-top: 1rem; transition: all 0.3s; border: none; cursor: pointer; }
+        .order-btn:hover { background: #128c7e; transform: translateY(-2px); }
+        
+        .add-cart-btn { display: inline-block; width: 100%; padding: 1rem; background: #ff6b35; color: #fff; text-align: center; border: none; border-radius: 5px; font-weight: 700; font-size: 1.1rem; margin-top: 1rem; transition: all 0.3s; cursor: pointer; }
+        .add-cart-btn:hover { background: #e55a2b; transform: translateY(-2px); }
+        
+        /* Cart Modal */
+        .cart-modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); animation: fadeIn 0.3s; }
+        .cart-content { background: #222; margin: 5% auto; padding: 2rem; border-radius: 10px; width: 90%; max-width: 700px; max-height: 80vh; overflow-y: auto; position: relative; border: 2px solid #ff6b35; animation: slideIn 0.3s; }
+        .close-cart { position: absolute; right: 20px; top: 20px; color: #fff; font-size: 2rem; cursor: pointer; width: 40px; height: 40px; background: #ff6b35; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.3s; }
+        .close-cart:hover { transform: rotate(90deg); }
+        .cart-title { font-size: 2rem; margin-bottom: 2rem; color: #ff6b35; text-align: center; }
+        
+        .cart-item { background: #1a1a1a; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #333; display: grid; grid-template-columns: 60px 1fr auto; gap: 1rem; align-items: center; }
+        .cart-item-image { width: 60px; height: 60px; background: #333; border-radius: 5px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .cart-item-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 5px; }
+        .cart-item-details h4 { color: #ff6b35; margin-bottom: 0.5rem; }
+        .cart-item-details p { color: #888; font-size: 0.9rem; }
+        
+        .cart-item-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; }
+        .quantity-control { display: flex; align-items: center; gap: 0.5rem; background: #333; border-radius: 5px; padding: 0.3rem; }
+        .quantity-control button { width: 30px; height: 30px; background: #ff6b35; color: #fff; border: none; border-radius: 3px; cursor: pointer; font-weight: 700; transition: background 0.3s; }
+        .quantity-control button:hover { background: #e55a2b; }
+        .quantity-control span { padding: 0 0.5rem; font-weight: 600; }
+        
+        .remove-item { color: #ff4444; cursor: pointer; font-size: 0.9rem; transition: color 0.3s; }
+        .remove-item:hover { color: #ff0000; }
+        
+        .cart-total { margin-top: 2rem; padding-top: 2rem; border-top: 2px solid #ff6b35; text-align: right; }
+        .cart-total h3 { font-size: 1.8rem; color: #fff; margin-bottom: 1.5rem; }
+        .checkout-btn { display: inline-block; width: 100%; padding: 1rem; background: #25d366; color: #fff; text-align: center; text-decoration: none; border-radius: 5px; font-weight: 700; font-size: 1.1rem; transition: all 0.3s; border: none; cursor: pointer; margin-top: 1rem; }
+        .checkout-btn:hover { background: #128c7e; transform: translateY(-2px); }
+        .empty-cart { text-align: center; padding: 3rem; color: #888; }
+        .empty-cart i { font-size: 4rem; margin-bottom: 1rem; color: #555; }
+        
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25d366; color: #fff; width: 60px; height: 60px; border-radius: 50%; text-align: center; font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: all 0.3s; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+        
+        footer { background: #000; padding: 3rem 5%; text-align: center; border-top: 2px solid #ff6b35; }
+        .footer-social a { color: #fff; font-size: 1.5rem; margin: 0 1rem; transition: color 0.3s; }
+        .footer-social a:hover { color: #ff6b35; }
+        
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; }
+        .menu-toggle span { width: 25px; height: 3px; background: #fff; margin: 3px 0; transition: 0.3s; }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: #000; flex-direction: column; padding: 2rem; text-align: center; }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: flex; }
+            .modal-body { grid-template-columns: 1fr; }
+            .social-icons { display: none; }
+            .cart-item { grid-template-columns: 50px 1fr; }
+            .cart-item-actions { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: center; }
+            .logo { font-size: 1.2rem; }
+            .nav-logo { height: 35px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="../armanya-cnc-lazer-kesim-website/assets/img/armanya logo.png" alt="Armanya Logo" class="nav-logo">
+            <span>ARMANYA</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Ana Sayfa</a></li>
+            <li><a href="urunler.html" class="active">Ürünlerimiz</a></li>
+            <li><a href="hakkimizda.html">Hakkımızda</a></li>
+            <li><a href="iletisim.html">İletişim</a></li>
+            <li class="cart-icon" onclick="toggleCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </li>
+        </ul>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/armanya_home?igsh=Njk3NWxzemIyaW1s" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://wa.me/905530303570" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div class="menu-toggle" id="mobileMenu">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-content">
+            <span class="close-cart" onclick="toggleCart()">&times;</span>
+            <h2 class="cart-title"><i class="fas fa-shopping-cart"></i> Sepetiniz</h2>
+            <div id="cartItems"></div>
+        </div>
+    </div>
+
+    <div class="page-header">
+        <h1>Ürünlerimiz</h1>
+        <p>Detaylı bilgi için ürüne tıklayın</p>
+    </div>
+
+    <section class="products-section">
+        <h2 class="section-title">CNC Kesim Metal Ürünler</h2>
+        <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <!-- Product Details Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/905530303570?text=Merhaba,%20ürünleriniz%20hakkında%20bilgi%20almak%20istiyorum" 
+       class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <footer>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/armanya_home?igsh=Njk3NWxzemIyaW1s" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://wa.me/905530303570" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>&copy; 2026 ARMANYA. Tüm hakları saklıdır.</p>
+        <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">
+            Ödeme ve sipariş için WhatsApp'tan bize ulaşın
+        </p>
+    </footer>
+
+    <script>
+        // ✅ Ürün verileri - Resim yolları ile güncellendi
+        const products = [
+            {
+                id: 1,
+                name: "Kelebek ve Çiçek Temalı Metal Duvar Dekoru",
+                price: 450,
+                image: "assets/img/cicekli-kelebek-figurlu-metal-duvar-tablosu.jpeg",
+                specs: {
+                    "Malzeme": "3mm Kalite Demir",
+                    "Ebat": "60x40 cm",
+                    "Renk": "Siyah Mat Boya",
+                    "Ağırlık": "1.2 kg",
+                    "Üretim Süresi": "3-5 İş Günü"
+                },
+                description: "Yaşam Alanınıza Doğanın Zarafetini Taşıyın: Kelebek ve Çiçek Detaylı Metal Duvar Tablosu"
+            },
+            {
+                id: 2,
+                name: "Sanatsal Dokunuş: Metal El Figürlü Duvar Tablosu",
+                price: 380,
+                image: "assets/img/michelangelo-ademin-yaratilisi-metal-duvar-tablosu.jpeg",
+                specs: {
+                    "Malzeme": "4mm MDF + Metal",
+                    "Çap": "40 cm",
+                    "Mekanizma": "Sessiz Quartz",
+                    "Pil": "Dahil (AA)",
+                    "Üretim Süresi": "2-4 İş Günü"
+                },
+                description: "Rönesans Esintisi Duvarınızda: El Figürlü Modern Metal Tablo"
+            },
+            {
+                id: 3,
+                name: "İslami Duvar Sanatı: Metal Cami Figürlü Tablo",
+                price: 650,
+                image: "assets/img/dekoratif-metal-cami-silueti-duvar-tablosu.jpeg",
+                specs: {
+                    "Malzeme": "5mm Kalite Demir",
+                    "Yükseklik": "80 cm",
+                    "Taban": "Ahşap Taban Dahil",
+                    "Boya": "Elektrostatik Toz Boya",
+                    "Üretim Süresi": "5-7 İş Günü"
+                },
+                description: "Evinize Huzur ve Estetik Katın: Lazer Kesim Metal Cami Duvar Dekoru"
+            },
+            {
+                id: 4,
+                name: "Karizmatik ve Modern: Metal Atatürk Silueti",
+                price: 220,
+                image: "assets/img/mustafa-kemal-ataturk-metal-siluet-duvar-tablosu.jpeg",
+                specs: {
+                    "Malzeme": "3mm Metal",
+                    "Adet": "2'li Set",
+                    "Ebat": "15x12 cm",
+                    "Renk Seçenekleri": "Siyah, Altın, Bakır",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Duvarınızda Bir Liderin Asaleti: Çizgisel Tasarım Metal Atatürk Portresi"
+            },
+            {
+                id: 5,
+                name: "Dinamik ve Estetik: Metal Balık Okulu Duvar Dekoru",
+                price: 340,
+                image: "assets/img/modern-balik-surusu-metal-duvar-dekoru.jpeg",
+                specs: {
+                    "Malzeme": "Kaliteli Demir",
+                    "Adet": "3'lü Set",
+                    "Yükseklikler": "10cm, 15cm, 20cm",
+                    "Mum Tipi": "Standart Mum Uyumlu",
+                    "Üretim Süresi": "3-4 İş Günü"
+                },
+                description: "Duvarlarınızda Huzurlu Bir Akış: Minimalist Metal Balık Sürüsü Tablosu"
+            },
+            {
+                id: 6,
+                name: "Keyif Köşesi: Metal AM-PM Mutfak Dekoru",
+                price: 290,
+                image: "assets/img/mutfak-dekoru-am-pm-kahve-sarap-metal-tablo.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Günün Her Saatine Şıklık: AM & PM Metal Mutfak ve Bar Panosu"
+            },
+            {
+                id: 7,
+                name: "Nostaljik Yolculuk: Metal Klasik Araba Duvar Dekoru",
+                price: 290,
+                image: "assets/img/retro-klasik-kamyonet-palmiye-metal-tablo.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Yolların Efsanesi Duvarınızda: Klasik Kamyonet ve Palmiye Temalı Metal Tablo"
+            }
+            ,
+            {
+                id: 8,
+                name: "Modern Avcı: Geometrik Metal Geyik Dekoru",
+                price: 290,
+                image: "assets/img/geometrik-geyik-basi-metal-duvar-tablosu.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Doğanın Gücü Modern Tasarımla Buluştu: Geometrik Metal Geyik Tablosu"
+            }
+            ,
+            {
+                id: 9,
+                name: "Estetik ve Zarif: Metal Kadın ve Çiçek Figürlü Dekor",
+                price: 290,
+                image: "assets/img/modern-kadin-yuzu-gul-detayli-metal-tablo.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Zarafetin Modern Yorumu: Gül Detaylı Kadın Silüeti Metal Tablo"
+            }
+            ,
+            {
+                id: 10,
+                name: "Gurur ve Sanat: Metal Atatürk İmzası ve Portresi",
+                price: 290,
+                image: "assets/img/ataturk-imzasi-ve-kalpakli-siluet-metal-tablo.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Bir Destanın İmzası Duvarınızda: Kalpaklı Atatürk ve İmza Temalı Metal Duvar Sanatı"
+            }
+            ,
+            {
+                id: 11,
+                name: "Vosvos Karavan & Palmiye Metal Dekor",
+                price: 290,
+                image: "assets/img/vosvos-karavan-palmiye-sahil-metal-tablo.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Gezgin ruhunuzu duvarlarınıza yansıtın! Retro tarzın simgesi vosvos karavan ve huzur veren palmiye detaylarıyla tasarlanmış Metal Dekor"
+            }
+            ,
+            {
+                id: 12,
+                name: "Geometrik Kaktüs ve Çöl Temalı Metal Dekor",
+                price: 290,
+                image: "assets/img/kaktus-col-manzarasi-geometrik-metal-tablo.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Egzotik Bir Dokunuş: Geometrik Kaktüs Temalı Metal Duvar Sanatı"
+            }
+            ,
+            {
+                id: 13,
+                name: "Kocatepe'den Sonsuzluğa: Atatürk Metal Dekoru",
+                price: 290,
+                image: "assets/img/kocatepe-ataturk-silueti-ve-imzali-metal-tablo.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Milli Mücadele Ruhu Duvarınızda: Kocatepe Atatürk ve İmza Metal Dekor"
+            }
+            ,
+            {
+                id: 14,
+                name: "Klasik ve Modernin Buluşması: Metal Portre Sanatı",
+                price: 290,
+                image: "assets/img/modern-antik-kadin-yuzu-metal-duvar-tablosu.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Zamanın Ötesinde Bir Estetik: Antik Büst Temalı Metal Kadın Tablosu"
+            }
+            ,
+            {
+                id: 15,
+                name: "Geometrik Geyik (Yarım Dolgulu Model)",
+                price: 290,
+                image: "assets/img/geometrik-yarim-dolu-geyik-basi-metal-tablo.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "bu geometrik geyik başı, ışık ve gölge dengesiyle duvarınıza modern bir derinlik katar."
+            }
+            ,
+            {
+                id: 16,
+                name: "Modern Çizgisel Atatürk ve İmza Metal Dekor",
+                price: 290,
+                image: "assets/img/modern-cizgisel-ataturk-ve-imza-metal-tablo.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Bu metal Atatürk ve İmza tablosu, Cumhuriyet ruhunu en şık haliyle duvarınıza taşır."
+            }
+            ,
+            {
+                id: 17,
+                name: "Çizgisel Atatürk Portresi (Ofis Konsepti)",
+                price: 290,
+                image: "assets/img/cizgisel-ataturk-portresi-metal-ofis-dekoru.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Atatürk portresi, modern sanatın gücüyle çalışma alanınıza saygınlık katar."
+            }
+            ,
+            {
+                id: 18,
+                name: "Zarif Kelebek Silüeti",
+                price: 290,
+                image: "assets/img/zarif-kelebek-silueti-dekoratif-metal-pano.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "En ince detaylarına kadar işlenmiş bu metal kelebek silüeti, minimalist ve modern ev dekorasyonları için şık bir tamamlayıcıdır."
+            }
+            ,
+            {
+                id: 19,
+                name: "İkili Deniz Yıldızı Metal Dekoru",
+                price: 290,
+                image: "assets/img/ikili-deniz-yildizi-figurlu-metal-duvar-sanati.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Karakteristik dokularla zenginleştirilmiş bu metal deniz yıldızı seti, banyo veya sahil evi dekorasyonları için mükemmel bir tamamlayıcıdır."
+            }
+            ,
+            {
+                id: 20,
+                name: "Geometrik Kartal Silüeti Metal Dekor",
+                price: 290,
+                image: "assets/img/geometrik-kartal-silueti-metal-duvar-dekoru.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Keskin hatlarla tasarlanan bu kartal figürlü metal tablo, her bakışta dinamik bir enerji yayar."
+            }
+            ,
+            {
+                id: 21,
+                name: "Geometrik Aslan Başı Tasarımı Metal Duvar Dekoru",
+                price: 290,
+                image: "assets/img/modern-geometrik-aslan-basi-metal-duvar-dekoru.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Ormanların kralı modern bir formda. Gücü ve otoriteyi temsil eden bu geometrik aslan metal tablo, salonunuza veya ofisinize karizmatik bir dokunuş katar."
+            }
+            ,
+            {
+                id: 22,
+                name: "Frida Kahlo Portresi Metal Duvar Dekoru",
+                price: 290,
+                image: "assets/img/frida-kahlo-cizgisel-metal-duvar-tablosu.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Frida Kahlo'nun ikonik duruşunu modern bir çizgi diliyle sunan bu metal portre, sanatsal dekorasyonların vazgeçilmez bir parçasıdır."
+            }
+            ,
+            {
+                id: 23,
+                name: "Welcome Yazılı Çay/Kahve Temalı Metal Mutfak Dekoru",
+                price: 290,
+                image: "assets/img/welcome-mutfak-panosu-cay-kahve-metal-dekor.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Mutfak ve kafeler için tasarlanmış bu 'Welcome' metal pano, çay ve kahve tutkunlarının favori dekorasyon parçası olacak."
+            }
+            ,
+            {
+                id: 24,
+                name: "Sevimli Kediler Metal Duvar Dekoru",
+                price: 290,
+                image: "assets/img/sevimli-kedi-figurlu-metal-duvar-panosu.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Patili dostlarımızın neşesi duvarınızda! Eğlenceli ve sevimli kedi figürlerinden oluşan bu metal kedi panosu, çocuk odaları ve hayvanseverlerin evleri için harika bir seçimdir."
+            }
+            ,
+            {
+                id: 25,
+                name: "Geometrik Yürüyen Kedi Silüeti Metal Duvar Dekoru",
+                price: 290,
+                image: "assets/img/modern-geometrik-kedi-silueti-metal-duvar-sanati.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Kedilerin asaletini geometrik çizgilerle keşfedin. Modern ve minimal bir yaklaşımla tasarlanan bu geometrik kedi metal tablo, kedi severler için en tarz hediye seçeneği."
+            }
+            ,
+            {
+                id: 26,
+                name: "Geometrik Fil Başı Tasarımı Metal Duvar Dekoru",
+                price: 290,
+                image: "assets/img/modern-geometrik-fil-kafasi-metal-duvar-tablosu.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Bu metal fil başı tablo, yaşam alanınıza egzotik ve şık bir hava katar"
+            }
+            ,
+            {
+                id: 27,
+                name: "Görkemli Kanat Açmış Kartal Metal Duvar Dekoru",
+                price: 290,
+                image: "assets/img/kanat-acmis-kartal-figurlu-metal-duvar-pano.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "Özgürlüğün en büyük simgesi geniş kanatlarında. Duvarınızda devasa ve etkileyici bir görünüm yaratan bu kartal figürlü metal pano, her dekorasyona güç katar."
+            }
+            ,
+            {
+                id: 28,
+                name: "Pikachu (Pokemon) Temalı Metal Dekor",
+                price: 290,
+                image: "assets/img/pikachu-pokemon-temali-metal-duvar-dekoru.jpeg",
+                specs: {
+                    "Malzeme": "Metal + Cam",
+                    "Ebat": "20x25 cm",
+                    "Çerçeve Genişliği": "3 cm",
+                    "Askı": "Dahil",
+                    "Üretim Süresi": "2-3 İş Günü"
+                },
+                description: "okemon dünyası odanıza konuk oluyor! Pikachu'nun neşeli enerjisini yansıtan bu metal Pokemon dekoru, çocuk odaları ve oyun alanları için eğlenceli ve dayanıklı bir seçimdir."
+            }
+            
+        ];
+
+        // Sepet
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Ürünleri render et - ✅ Resim desteği eklendi
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = products.map(product => `
+                <div class="product-card" onclick="openModal(${product.id})">
+                    <div class="product-image">
+                        <img src="${product.image}" 
+                             alt="${product.name}"
+                             onerror="this.parentElement.innerHTML='<div class=\\'image-fallback\\'><i class=\\'fas fa-image\\'></i></div>'">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">₺${product.price}</div>
+                        <button class="add-to-cart" onclick="event.stopPropagation(); addToCart(${product.id})">
+                            <i class="fas fa-cart-plus"></i> Sepete Ekle
+                        </button>
+                    </div>
+                    <div class="product-hint">Detaylar için tıklayın</div>
+                </div>
+            `).join('');
+        }
+
+        // Sepete ekle
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            saveCart();
+            updateCartCount();
+            showNotification('Ürün sepete eklendi!');
+        }
+
+        // Sepetten çıkar
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+            updateCartCount();
+            renderCart();
+        }
+
+        // Miktar artır
+        function increaseQuantity(productId) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += 1;
+                saveCart();
+                renderCart();
+                updateCartCount();
+            }
+        }
+
+        // Miktar azalt
+        function decreaseQuantity(productId) {
+            const item = cart.find(item => item.id === productId);
+            if (item && item.quantity > 1) {
+                item.quantity -= 1;
+                saveCart();
+                renderCart();
+                updateCartCount();
+            } else if (item && item.quantity === 1) {
+                removeFromCart(productId);
+            }
+        }
+
+        // Sepeti kaydet
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        // Sepet sayısını güncelle
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        // Sepeti göster/gizle
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            if (modal.style.display === 'block') {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            } else {
+                renderCart();
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Sepeti render et - ✅ Resim desteği eklendi
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Sepetiniz boş</p>
+                        <a href="urunler.html" class="btn" style="margin-top: 1rem; display: inline-block; background:#ff6b35; color:#fff; padding:0.8rem 1.5rem; border-radius:5px; text-decoration:none;">Alışverişe Başla</a>
+                    </div>
+                `;
+                return;
+            }
+
+            let total = 0;
+            let itemsHTML = cart.map(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                return `
+                    <div class="cart-item">
+                        <div class="cart-item-image">
+                            <img src="${item.image}" 
+                                 alt="${item.name}"
+                                 onerror="this.parentElement.innerHTML='<i class=\\'fas fa-image\\' style=\\'color:#555;font-size:1.5rem;\\'></i>'">
+                        </div>
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <p>₺${item.price} x ${item.quantity}</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <div class="quantity-control">
+                                <button onclick="decreaseQuantity(${item.id})">-</button>
+                                <span>${item.quantity}</span>
+                                <button onclick="increaseQuantity(${item.id})">+</button>
+                            </div>
+                            <span class="remove-item" onclick="removeFromCart(${item.id})">
+                                <i class="fas fa-trash"></i> Kaldır
+                            </span>
+                            <div style="font-weight: 700; color: #ff6b35; margin-top: 0.5rem;">
+                                ₺${itemTotal}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            container.innerHTML = `
+                ${itemsHTML}
+                <div class="cart-total">
+                    <h3>Toplam: ₺${total}</h3>
+                    <button class="checkout-btn" onclick="checkoutWhatsApp()">
+                        <i class="fab fa-whatsapp"></i> WhatsApp ile Sipariş Ver
+                    </button>
+                </div>
+            `;
+        }
+
+        // WhatsApp ile sipariş
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert('Sepetiniz boş!');
+                return;
+            }
+
+            let message = 'Merhaba, aşağıdaki ürünleri sipariş etmek istiyorum:\n\n';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                message += `• ${item.name}\n`;
+                message += `  Fiyat: ₺${item.price} x ${item.quantity}\n`;
+                message += `  Toplam: ₺${itemTotal}\n\n`;
+            });
+
+            message += `*GENEL TOPLAM: ₺${total}*\n\n`;
+            message += 'Adres ve kargo bilgileri için dönüşünüzü bekliyorum.';
+
+            const whatsappUrl = `https://wa.me/905530303570?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Modal açma - ✅ Resim desteği eklendi
+        function openModal(productId) {
+            const modal = document.getElementById('productModal');
+            const modalBody = document.getElementById('modalBody');
+            const product = products.find(p => p.id === productId);
+
+            let specsHtml = '';
+            for (let [key, value] of Object.entries(product.specs)) {
+                specsHtml += `<li><span>${key}</span><strong>${value}</strong></li>`;
+            }
+
+            modalBody.innerHTML = `
+                <div class="modal-image">
+                    <img src="${product.image}" 
+                         alt="${product.name}"
+                         onerror="this.parentElement.innerHTML='<div class=\\'image-fallback\\'><i class=\\'fas fa-image\\'></i></div>'">
+                </div>
+                <div class="modal-details">
+                    <h2>${product.name}</h2>
+                    <div class="price">₺${product.price}</div>
+                    <p>${product.description}</p>
+                    <ul class="specs-list">
+                        ${specsHtml}
+                    </ul>
+                    <button class="add-cart-btn" onclick="addToCart(${product.id}); closeModal();">
+                        <i class="fas fa-cart-plus"></i> Sepete Ekle
+                    </button>
+                    <a href="https://wa.me/905530303570?text=Merhaba,%20${encodeURIComponent(product.name)}%20ürünü%20hakkında%20bilgi%20almak%20istiyorum." 
+                       class="order-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp'tan Bilgi Al
+                    </a>
+                </div>
+            `;
+
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Modal kapatma
+        function closeModal() {
+            const modal = document.getElementById('productModal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Modal dışına tıklayınca kapatma
+        window.onclick = function(event) {
+            const modal = document.getElementById('productModal');
+            const cartModal = document.getElementById('cartModal');
+            if (event.target == modal) closeModal();
+            if (event.target == cartModal) toggleCart();
+        }
+
+        // ESC tuşu ile kapatma
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+                const cartModal = document.getElementById('cartModal');
+                if (cartModal.style.display === 'block') toggleCart();
+            }
+        });
+
+        // Bildirim göster
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: #25d366;
+                color: #fff;
+                padding: 1rem 2rem;
+                border-radius: 5px;
+                z-index: 3000;
+                animation: slideInRight 0.3s;
+                font-weight: 600;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        // Mobile Menu
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+        mobileMenu.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>
